@@ -3,7 +3,7 @@
 #include "Message.hpp"
 #include "MovingAverager.hpp"
 #include "PeriodicSampler.hpp"
-
+#include <vector>
 // You are not allowed to make breaking changes to the class interface,
 // but you are allowed to add additional methods/fields, as 
 // well as MODIFY the existing interface so as to make it
@@ -16,18 +16,20 @@
 class SimplePublisher {
 public:
 	// subscribe registers a Subscriber to start receiving messages
-	void subscribe(Averager*);
-	void subscribe(MovingAverager*);
-	void subscribe(PeriodicSampler*);
+	void subscribe(Averager* input);
+	void subscribe(MovingAverager* input);
+	void subscribe(PeriodicSampler* input);
 
 	// unsubscribe removes a Subscriber from the Publisher
 	// Subscribers are removed based on their `id`
 	// id's will always be unique
-	void unsubscribe(Averager*);
-	void unsubscribe(MovingAverager*);
-	void unsubscribe(PeriodicSampler*);
+	void unsubscribe(Averager* input);
+	void unsubscribe(MovingAverager* input);
+	void unsubscribe(PeriodicSampler* input);
 
 	// signal receives a message from an external source
 	// and replays that message to all the current subscribers
-	void signal(Message);
+	void signal(Message input);
+private:
+	std::vector<Averager*>subscribers;
 };

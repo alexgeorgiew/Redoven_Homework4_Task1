@@ -14,9 +14,12 @@
 // Average of N numbers = sum(all numbers) / N
 
 #include "Averager.hpp"
-class MovingAverager:Averager{
+class MovingAverager:virtual public Averager{
 public:
 	MovingAverager(std::string id, size_t windowSize);
+	~MovingAverager();
+	MovingAverager(const MovingAverager& input);
+	//MovingAverager& operator=(const MovingAverager& input);   this for this operator?????
 
 	// id is a unique identifier for a Subscriber
 	// Should never be changed once initialized
@@ -27,13 +30,19 @@ public:
 	// Should never be changed once initialized
 	const size_t windowSize;
 
+	void signal(Message input) override;
 	// signal adds a new data point
 	// Remember, you only need the last windowSize number of 
 	// data points added, older data points should be ignored
 	//void signal(Message);
 
+	int read() override;
 	// read calculates the average of the last windowSize number
 	// of data points
 	// returns 0 if there's no data points
 	//int read();
+private:
+	int* nums;
+	int count_of_meaningful_numbers=0;
+	int sum_of_numbers()const;
 };

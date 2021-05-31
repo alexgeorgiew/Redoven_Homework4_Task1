@@ -20,12 +20,13 @@ public:
 	const std::string id;
 
 	// signal adds a new data point
-	void signal(Message input);
+	virtual void signal(Message input);
 
 	// read calculates the average of all data points provided so far
 	// returns 0 if there's no data points
-	int read();
+	virtual int read();
 private:
 	int sum_of_all_signals;
+protected:
 	unsigned int count_of_all_signals=0;
 };
