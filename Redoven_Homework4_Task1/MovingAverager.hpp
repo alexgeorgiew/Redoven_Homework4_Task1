@@ -14,11 +14,10 @@
 // Average of N numbers = sum(all numbers) / N
 
 #include "Averager.hpp"
+#include <vector>
 class MovingAverager:virtual public Averager{
 public:
 	MovingAverager(std::string id, size_t windowSize);
-	~MovingAverager();
-	MovingAverager(const MovingAverager& input);
 	//MovingAverager& operator=(const MovingAverager& input);   this for this operator?????
 
 	// id is a unique identifier for a Subscriber
@@ -42,7 +41,6 @@ public:
 	// returns 0 if there's no data points
 	//int read();
 private:
-	int* nums;
-	int count_of_meaningful_numbers=0;
+	std::vector<int> nums;
 	int sum_of_numbers()const;
 };

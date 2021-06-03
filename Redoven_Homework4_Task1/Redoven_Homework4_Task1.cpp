@@ -78,10 +78,10 @@ void testPeriodicSampler()
 int main()
 {
 
-    testSimplePublisher();
+    /*testSimplePublisher();
     testBacklogPublisher();
     std::cout << "Now 3 test" << std::endl;
     testMovingAverager();
     std::cout << "Now 4 test" << std::endl;
-    testPeriodicSampler();
+    testPeriodicSampler();*/
 }
