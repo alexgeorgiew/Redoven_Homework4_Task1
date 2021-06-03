@@ -3,6 +3,7 @@
 #include "MovingAverager.hpp"
 #include "PeriodicSampler.hpp"
 #include <string>
+#include <vector>
 
 // You are not allowed to make breaking changes to the class interface,
 // but you are allowed to add additional methods/fields, as 
@@ -18,12 +19,14 @@
 class Repository {
 public:
 	// add registers a new Subscriber in the Repository
-	void add(Averager*);
-	void add(MovingAverager*);
-	void add(PeriodicSampler*);
-
+	void add(Averager* input);
+	void add(MovingAverager* input);
+	void add(PeriodicSampler* input);
+	~Repository();
 	// get returns a Subscriber in the Repository if a
 	// Subscriber with the given id exists.
 	// Returns nullptr otherwise
-	void* get(std::string id);
+	Averager* get(std::string id);
+	private:
+		std::vector<Averager*>subscibers;
 };

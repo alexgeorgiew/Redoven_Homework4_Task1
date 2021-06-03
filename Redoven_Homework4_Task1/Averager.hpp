@@ -24,7 +24,7 @@ public:
 
 	// read calculates the average of all data points provided so far
 	// returns 0 if there's no data points
-	virtual int read();
+	virtual int read()const;
 private:
 	int sum_of_all_signals;
 protected:

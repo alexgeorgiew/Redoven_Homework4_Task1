@@ -19,10 +19,10 @@ public:
 	void subscribe(Averager* input);
 	void subscribe(MovingAverager* input);
 	void subscribe(PeriodicSampler* input);
-
 	// unsubscribe removes a Subscriber from the Publisher
 	// Subscribers are removed based on their `id`
 	// id's will always be unique
+
 	void unsubscribe(Averager* input);
 	void unsubscribe(MovingAverager* input);
 	void unsubscribe(PeriodicSampler* input);

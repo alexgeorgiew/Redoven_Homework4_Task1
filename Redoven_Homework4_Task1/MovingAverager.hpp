@@ -36,7 +36,7 @@ public:
 	// data points added, older data points should be ignored
 	//void signal(Message);
 
-	int read() override;
+	int read()const override;
 	// read calculates the average of the last windowSize number
 	// of data points
 	// returns 0 if there's no data points

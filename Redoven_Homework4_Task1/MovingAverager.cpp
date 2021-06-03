@@ -1,4 +1,5 @@
 #include "MovingAverager.hpp"
+#include <iostream>
 MovingAverager::MovingAverager(std::string id, size_t windowSize):Averager(id),windowSize(windowSize)
 {
 	this->nums = new int[windowSize];
@@ -33,7 +34,7 @@ void MovingAverager::signal(Message input)
 		this->nums[windowSize - 1] = input.data;
 	}
 }
-int MovingAverager::read()
+int MovingAverager::read()const
 {
 	return this->sum_of_numbers()/ windowSize;
 }

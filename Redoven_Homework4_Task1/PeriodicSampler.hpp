@@ -30,7 +30,7 @@ public:
 
 	// read returns the latest period-th data point if such exists
 	// 0 otherwise
-	int read()override;
+	int read()const override;
 	private:
 		size_t period;
 		int non_ignored_message;

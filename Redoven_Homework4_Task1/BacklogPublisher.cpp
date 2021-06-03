@@ -1,5 +1,5 @@
 #include "BacklogPublisher.hpp"
-
+#include <iostream>
 void BacklogPublisher::subscribe(Averager* input)
 {
 	this->subscribers.push_back(input);
@@ -59,6 +59,7 @@ void BacklogPublisher::unsubscribe(PeriodicSampler* input)
 }
 void BacklogPublisher::signal(Message input)
 {
+	this->old_messages.push_back(input);
 	for (int i = 0; i < this->subscribers.size(); i++)
 	{
 		this->subscribers[i]->signal(input);

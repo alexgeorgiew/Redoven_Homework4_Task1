@@ -1,5 +1,5 @@
 #include "SimplePublisher.hpp"
-
+#include <iostream>
 void SimplePublisher::subscribe(Averager* input)
 {
 	this->subscribers.push_back(input);

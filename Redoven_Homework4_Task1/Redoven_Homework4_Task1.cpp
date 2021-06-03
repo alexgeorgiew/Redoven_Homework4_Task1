@@ -47,36 +47,41 @@ void testMovingAverager() {
     repo.add(&mavg1);
 
     SimplePublisher sp;
-    sp.subscribe(static_cast<MovingAverager*>(repo.get("mavg1")));
+    
+    sp.subscribe(dynamic_cast<MovingAverager*>(repo.get("mavg1")));
     sp.signal({ 10 });
     sp.signal({ 0 });
-    assert(static_cast<MovingAverager*>(repo.get("mavg1"))->read() == 5);
-
+    assert(dynamic_cast<MovingAverager*>(repo.get("mavg1"))->read() == 5);
+    
     sp.signal({ 4 });
-    assert(static_cast<MovingAverager*>(repo.get("mavg1"))->read() == 2);
+    assert(dynamic_cast<MovingAverager*>(repo.get("mavg1"))->read() == 2);
 }
 
-void testPeriodicSampler() {
+void testPeriodicSampler()
+{
+   
     Repository repo;
     PeriodicSampler ps2("ps2", 2);
     repo.add(&ps2);
 
     SimplePublisher sp;
-    sp.subscribe(static_cast<PeriodicSampler*>(repo.get("ps2")));
+    sp.subscribe(dynamic_cast<PeriodicSampler*>(repo.get("ps2")));
     sp.signal({ 10 });
-    assert(static_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 10);
-
+    assert(dynamic_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 10);
     sp.signal({ 0 });
-    assert(static_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 10);
-
+    assert(dynamic_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 10);
+   
     sp.signal({ 4 });
-    assert(static_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 4);
+    assert(dynamic_cast<PeriodicSampler*>(repo.get("ps2"))->read() == 4);
 }
 
 int main()
 {
+
     testSimplePublisher();
     testBacklogPublisher();
+    std::cout << "Now 3 test" << std::endl;
     testMovingAverager();
+    std::cout << "Now 4 test" << std::endl;
     testPeriodicSampler();
 }

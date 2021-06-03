@@ -9,7 +9,7 @@ void Averager::signal(Message input)
 	this->sum_of_all_signals += input.data;
 	this->count_of_all_signals++;
 }
-int Averager::read()
+int Averager::read()const
 {
 	if (this->count_of_all_signals == 0)
 	{
