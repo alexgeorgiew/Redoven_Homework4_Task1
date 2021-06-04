@@ -8,6 +8,8 @@
 #include "Repository.hpp"
 #include <assert.h>
 #include <iostream>
+
+
 void testSimplePublisher() {
     Repository repo;
 
@@ -16,24 +18,24 @@ void testSimplePublisher() {
 
     Averager avg2("avg2");
     repo.add(&avg2);
-
     SimplePublisher sp;
     sp.subscribe(static_cast<Averager*>(repo.get("avg1")));
     sp.signal({ 10 });
     sp.subscribe((Averager*)repo.get("avg2"));
     sp.signal({ 0 });
-
     assert(static_cast<Averager*>(repo.get("avg1"))->read() == 5);
     assert(static_cast<Averager*>(repo.get("avg2"))->read() == 0);
     assert(avg1.read() == 0);
+    
 }
 
 void testBacklogPublisher() {
     Repository repo;
     Averager avg1("avg1");
     repo.add(&avg1);
-
     BacklogPublisher bp;
+
+   
     bp.signal({ 10 });
     bp.signal({ 0 });
 
@@ -47,7 +49,6 @@ void testMovingAverager() {
     repo.add(&mavg1);
 
     SimplePublisher sp;
-    
     sp.subscribe(dynamic_cast<MovingAverager*>(repo.get("mavg1")));
     sp.signal({ 10 });
     sp.signal({ 0 });
@@ -77,11 +78,12 @@ void testPeriodicSampler()
 
 int main()
 {
-
-    /*testSimplePublisher();
+    std::cout << "Now 1 test" << std::endl;
+    testSimplePublisher();
+    std::cout << "Now 2 test" << std::endl;
     testBacklogPublisher();
     std::cout << "Now 3 test" << std::endl;
     testMovingAverager();
     std::cout << "Now 4 test" << std::endl;
-    testPeriodicSampler();*/
+    testPeriodicSampler();
 }

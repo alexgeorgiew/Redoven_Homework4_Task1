@@ -18,7 +18,6 @@
 class MovingAverager:virtual public Averager{
 public:
 	MovingAverager(std::string id, size_t windowSize);
-	//MovingAverager& operator=(const MovingAverager& input);   this for this operator?????
 
 	// id is a unique identifier for a Subscriber
 	// Should never be changed once initialized

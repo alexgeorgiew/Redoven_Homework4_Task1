@@ -6,6 +6,32 @@ Repository::~Repository()
 	{
 		delete pointer;
 	}
+	subscibers.clear();
+}
+Repository::Repository(const Repository& input)
+{
+	for (int i = 0; i < input.subscibers.size(); i++)
+	{
+		Averager* variable = new Averager(*input.subscibers[i]);
+		this->subscibers.push_back(variable);
+	}
+}
+Repository& Repository::operator=(const Repository& input)
+{
+	if (this != &input)
+	{
+		for (Averager* pointer : this->subscibers)
+		{
+			delete pointer;
+		}
+		subscibers.clear();
+		for (int i = 0; i < input.subscibers.size(); i++)
+		{
+			Averager* variable = new Averager(*input.subscibers[i]);
+			this->subscibers.push_back(variable);
+		}
+	}
+	return *this;
 }
 void Repository::add(Averager* input)
 {

@@ -19,6 +19,9 @@
 class Repository {
 public:
 	// add registers a new Subscriber in the Repository
+	Repository() = default;
+	Repository(const Repository& input);
+	Repository& operator=(const Repository& input);
 	void add(Averager* input);
 	void add(MovingAverager* input);
 	void add(PeriodicSampler* input);

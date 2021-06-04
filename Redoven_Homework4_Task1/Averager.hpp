@@ -14,7 +14,7 @@
 class Averager {
 public:
 	Averager(std::string id);
-
+	virtual ~Averager()=default;
 	// id is a unique identifier for a Subscriber
 	// Should never be changed once initialized
 	const std::string id;
@@ -25,8 +25,7 @@ public:
 	// read calculates the average of all data points provided so far
 	// returns 0 if there's no data points
 	virtual int read()const;
-private:
-	int sum_of_all_signals;
 protected:
 	unsigned int count_of_all_signals=0;
+	int sum_of_all_signals;
 };

@@ -15,21 +15,31 @@
 // subscribers
 class SimplePublisher {
 public:
+	SimplePublisher();
+	~SimplePublisher();
+	SimplePublisher(const SimplePublisher& input);
+	SimplePublisher& operator=(const SimplePublisher& input);
 	// subscribe registers a Subscriber to start receiving messages
-	void subscribe(Averager* input);
-	void subscribe(MovingAverager* input);
-	void subscribe(PeriodicSampler* input);
+	void virtual subscribe(Averager* input);
+	void virtual subscribe(MovingAverager* input);
+	void virtual subscribe(PeriodicSampler* input);
 	// unsubscribe removes a Subscriber from the Publisher
 	// Subscribers are removed based on their `id`
 	// id's will always be unique
 
-	void unsubscribe(Averager* input);
-	void unsubscribe(MovingAverager* input);
-	void unsubscribe(PeriodicSampler* input);
+	void  unsubscribe(Averager* input);
+	void  unsubscribe(MovingAverager* input);
+	void  unsubscribe(PeriodicSampler* input);
 
 	// signal receives a message from an external source
 	// and replays that message to all the current subscribers
-	void signal(Message input);
-private:
-	std::vector<Averager*>subscribers;
+	void virtual signal(Message input);
+protected:
+	void add_element(Averager* input);
+	void remove_element(Averager* input);
+	void copy_memory(Averager** input, int size_of_input, int elements_in_input);
+	void allocate_more_memory();
+	void Delete();
+	Averager** subscribers;
+	int size_of_array, elements_in_array;
 };
