@@ -1,6 +1,6 @@
 #include "Averager.hpp"
 
-Averager::Averager(std::string id):id(id),sum_of_all_signals(0)
+Averager::Averager(std::string id):id(id)
 {
 	
 }

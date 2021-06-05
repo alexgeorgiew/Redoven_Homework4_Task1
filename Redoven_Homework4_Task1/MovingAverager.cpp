@@ -9,18 +9,27 @@ void MovingAverager::signal(Message input)
 }
 int MovingAverager::read()const
 {
-	
-	return this->sum_of_numbers()/ windowSize;
+	if (this->nums.size() == 0)return 0;
+	if (windowSize > this->nums.size())
+	{
+		return   this->sum_of_numbers() / this->nums.size();
+	}
+	return this->sum_of_numbers()/ static_cast<int>(windowSize);
 }
 int MovingAverager::sum_of_numbers()const
 {
 	int result=0;
-	int counter = windowSize;
-	for (int i = this->nums.size()-1; i >-1; --i)
+	if (static_cast<int>(windowSize) >= this->nums.size())
 	{
-		if (counter==0)return result;
-		result += this->nums[i];
-		counter--;
+		for (int i = 0; i < this->nums.size(); i++)result += this->nums[i];
+		return result;
 	}
-	return result;
+	else
+	{
+		for (int i = this->nums.size()  - static_cast<int>(windowSize); i < this->nums.size(); i++)
+		{
+			result += this->nums[i];
+		}
+		return result;
+	}
 }

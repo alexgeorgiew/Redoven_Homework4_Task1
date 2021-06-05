@@ -27,5 +27,5 @@ public:
 	virtual int read()const;
 protected:
 	unsigned int count_of_all_signals=0;
-	int sum_of_all_signals;
+	int sum_of_all_signals=0;
 };

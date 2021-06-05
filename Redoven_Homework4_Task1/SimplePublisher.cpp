@@ -87,7 +87,7 @@ void  SimplePublisher::Delete()
 
 void  SimplePublisher::copy_memory(Averager** input,int size_of_input,int elements_in_input)
 {
-	Averager** result = new Averager * [size_of_array];
+	Averager** result = new Averager * [size_of_input];
 	for (int i = 0; i < size_of_input; i++)
 	{
 		result[i] = input[i];

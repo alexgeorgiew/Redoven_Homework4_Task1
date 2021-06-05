@@ -9,7 +9,23 @@
 #include <assert.h>
 #include <iostream>
 
-
+void Mytest()
+{
+    Repository repo;
+    MovingAverager avg1("mavg1",2);
+    avg1.signal({ 100 });
+    BacklogPublisher bp;
+    bp.signal({ 4 });
+    repo.add(&avg1);
+    bp.signal({ 4 });
+    bp.signal({ 4 });
+    bp.subscribe(dynamic_cast<MovingAverager*>(repo.get("mavg1")));
+    std::cout << dynamic_cast<MovingAverager*>(repo.get("mavg1"))->read() << std::endl;
+    bp.signal({ 0 });
+    bp.signal({ 4 });
+    bp.signal({ 2 });
+    std::cout << dynamic_cast<MovingAverager*>(repo.get("mavg1"))->read() << std::endl;
+}
 void testSimplePublisher() {
     Repository repo;
 
@@ -78,6 +94,8 @@ void testPeriodicSampler()
 
 int main()
 {
+    std::cout << "my test" << std::endl;
+    Mytest();
     std::cout << "Now 1 test" << std::endl;
     testSimplePublisher();
     std::cout << "Now 2 test" << std::endl;
